@@ -420,7 +420,7 @@ function Projects() {
 
         {/* JIO Design System hero card */}
         <FadeUp className="mt-[2px]">
-          <div className="group relative overflow-hidden cursor-pointer" style={{ background: "#0D0D10" }}>
+          <Link to="/projects/jio-design-system" className="group relative overflow-hidden cursor-pointer block" style={{ background: "#0D0D10" }}>
             <div className="flex flex-col md:flex-row">
               <div className="md:w-1/2 flex flex-col justify-center p-10 lg:p-14 border-b md:border-b-0 md:border-r border-white/[0.07]">
                 <div className="flex items-center gap-3 mb-5">
@@ -466,7 +466,7 @@ function Projects() {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         </FadeUp>
 
         {/* Compact cards */}
