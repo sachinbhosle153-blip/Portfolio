@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import resumeUrl from "../imports/Sachin_Bhosle_Resume_v3.pdf?url";
+import profileUrl from "../imports/profile.jpg";
 import miLogoUrl from "../imports/image.png";
 import jioDesignUrl from "../imports/image-1.png";
 import jioDesign2Url from "../imports/image-3.png";
@@ -304,7 +305,7 @@ function About() {
         <FadeUp>
           <div className="lg:sticky lg:top-28">
             <div className="relative mb-8 bg-[#111115] overflow-hidden" style={{ aspectRatio: "3/4" }}>
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&auto=format" alt="Sachin Bhosle — Senior Product & UX Designer" className="w-full h-full object-cover opacity-80 grayscale" />
+              <img src={profileUrl} alt="Sachin Bhosle — Senior Product & UX Designer" className="w-full h-full object-cover opacity-80" />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(9,9,11,0.65) 0%, transparent 50%)" }} />
               <div className="absolute bottom-5 left-5 right-5">
                 <span className="font-['DM_Mono',monospace] text-[10px] text-accent/80 tracking-[0.25em] uppercase">Bengaluru, India</span>
@@ -315,7 +316,7 @@ function About() {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: <Linkedin size={13} />, href: "#" },
+                { icon: <Linkedin size={13} />, href: "https://linkedin.com/in/sachin-bhosle-1810/" },
                 { icon: <ExternalLink size={13} />, href: "https://behance.net/bhoslesachin" },
                 { icon: <Github size={13} />, href: "#" },
                 { icon: <Mail size={13} />, href: "#contact" },
@@ -668,7 +669,7 @@ function Contact() {
             {[
               { icon: <Mail size={13} />, label: "sachinbhosle153@gmail.com", href: "mailto:sachinbhosle153@gmail.com" },
               { icon: <Phone size={13} />, label: "+91 86188 37172", href: "tel:+918618837172" },
-              { icon: <Linkedin size={13} />, label: "linkedin.com/in/sachinbhosle", href: "#" },
+              { icon: <Linkedin size={13} />, label: "linkedin.com/in/sachin-bhosle-1810", href: "https://linkedin.com/in/sachin-bhosle-1810/" },
               { icon: <ExternalLink size={13} />, label: "behance.net/bhoslesachin", href: "https://behance.net/bhoslesachin" },
             ].map((item, i) => (
               <a key={i} href={item.href} className="group flex items-center gap-3 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/65 hover:text-white/90 transition-colors">

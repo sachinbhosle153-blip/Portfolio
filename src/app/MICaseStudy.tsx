@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { motion, useInView } from "motion/react";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
 import miLogoUrl from "../imports/image.png";
 import jioDesignUrl from "../imports/image-1.png";
 
@@ -492,6 +492,22 @@ export function MICaseStudy() {
             </FadeUp>
           ))}
         </div>
+
+        <FadeUp className="mt-6">
+          <div className="border border-white/[0.08] bg-white/[0.02] px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+            <span className="font-['Plus_Jakarta_Sans',sans-serif] text-[12px] text-white/40 leading-relaxed">
+              Due to confidentiality, some project details may not be fully visible here. View the complete case study on Behance —
+            </span>
+            <a
+              href="https://www.behance.net/gallery/195188123/Cricket-Intelligence-Platform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 inline-flex items-center gap-1.5 font-['DM_Mono',monospace] text-[11px] text-[#C8A96E] tracking-widest hover:text-white transition-colors duration-200"
+            >
+              View on Behance <ExternalLink size={11} />
+            </a>
+          </div>
+        </FadeUp>
 
         <Divider />
 
