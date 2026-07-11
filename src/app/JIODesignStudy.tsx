@@ -46,7 +46,7 @@ function Divider() {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const OVERVIEW = [
-  { label: "Role", value: "Design System Architect" },
+  { label: "Role", value: "Product Designer · Core Contributor" },
   { label: "Platform", value: "Watch · TV · Mobile · Web" },
   { label: "Outcome", value: "Adopted across 20+ teams" },
 ];
@@ -55,22 +55,22 @@ const PROCESS = [
   {
     step: "01",
     title: "Audit",
-    desc: "Catalogued UI patterns across all JIO product surfaces — mobile, TV, watch, and web — to map inconsistencies and identify the gaps a shared system needed to close.",
+    desc: "Helped catalogue UI patterns across all JIO product surfaces — mobile, TV, watch, and web — to map inconsistencies and identify the gaps the team's shared system needed to close.",
   },
   {
     step: "02",
     title: "Foundation",
-    desc: "Defined the token architecture: colour roles, typography scale, spacing increments, elevation layers, and motion curves — all mapped to light and dark modes.",
+    desc: "Contributed to the token architecture: colour roles, typography scale, spacing increments, elevation layers, and motion curves — all mapped to light and dark modes.",
   },
   {
     step: "03",
     title: "Build",
-    desc: "Built component libraries and surface-specific UI kits for wearables, large-screen TV experiences, and mobile — each sharing the same token foundation.",
+    desc: "Built component libraries and surface-specific UI kits for wearables, large-screen TV experiences, and mobile — each sharing the same token foundation, in close collaboration with engineering.",
   },
   {
     step: "04",
     title: "Scale",
-    desc: "Documented standards, ran onboarding sessions with product teams, and provided hands-on support through adoption across 20+ internal squads.",
+    desc: "Helped document standards, ran onboarding sessions with product teams, and provided hands-on support through adoption across 20+ internal squads.",
   },
 ];
 
@@ -180,7 +180,7 @@ export function JIODesignStudy() {
               className="font-['Fraunces',serif] font-light text-white leading-[0.95] tracking-tight"
               style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)" }}
             >
-              JIO Design System<br />Architecture & Rollout
+System of Interaction<br />JIO's Design System at Scale
             </motion.h1>
           </div>
 
@@ -191,9 +191,10 @@ export function JIODesignStudy() {
             className="font-['Plus_Jakarta_Sans',sans-serif] font-light text-white/60 max-w-lg mx-auto leading-relaxed mb-12"
             style={{ fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)" }}
           >
-            Building a cross-platform design language from the ground up — covering wearables,
-            large-screen TV, AR concepts, data visualisation, and colour theory — adopted
-            across 20+ product teams at JIO AI.
+            Core contributor to System of Interaction (SOI) — JIO's cross-platform design system
+            spanning wearables, large-screen TV, mobile, and web. Worked alongside design system
+            architects and engineers to standardise components, tokens, and documentation
+            adopted across 20+ product teams at JIO AI.
           </motion.p>
 
           <motion.div
@@ -228,7 +229,7 @@ export function JIODesignStudy() {
               When I joined JIO Platforms AI, multiple product teams were building independently — each with their own colour definitions, component patterns, and no documentation standards. The result was visual and experiential fragmentation across one of India's largest tech platforms.
             </p>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[15px] text-white/65 leading-[1.85]">
-              As Design System Architect, I was responsible for auditing the existing landscape, defining the token foundation, building platform-specific UI kits, and driving adoption across 20+ internal squads — covering mobile, wearable, TV, and web surfaces.
+              As a core contributor on the team building System of Interaction (SOI), I worked alongside experienced design system architects, product designers, and engineers — helping audit the existing landscape, implement the token foundation, build platform-specific UI kits, and drive adoption across 20+ internal squads covering mobile, wearable, TV, and web surfaces.
             </p>
           </FadeUp>
           <FadeUp delay={0.2} className="grid grid-cols-2 gap-[1px] bg-white/[0.07]">
@@ -303,7 +304,7 @@ export function JIODesignStudy() {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <FadeUp delay={0.1}>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] mb-6">
-              JIO's wearable platform had no design language of its own. I built it from scratch — defining interaction patterns, touch target rules, typography hierarchy for tiny screens, and a complete set of UI kits covering smart home control, navigation, and health & fitness tracking.
+              JIO's wearable platform had no design language of its own. I contributed to building it from the ground up alongside the core SOI team — helping define interaction patterns, touch target rules, typography hierarchy for tiny screens, and a complete set of UI kits covering smart home control, navigation, and health & fitness tracking.
             </p>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] mb-8">
               Both light and dark mode variants were designed in full, with the JIO brand colour system adapted to meet contrast and legibility requirements specific to watch displays.
@@ -378,7 +379,7 @@ export function JIODesignStudy() {
           </FadeUp>
           <FadeUp delay={0.1}>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] mb-6">
-              Health and fitness data on wearables demands extreme clarity at tiny scale. I designed a standardised data visualisation library for JIO Watch — covering line charts for trends, donut rings for goal tracking, and bar charts for daily activity comparisons.
+              Health and fitness data on wearables demands extreme clarity at tiny scale. I contributed to a standardised data visualisation library for JIO Watch — covering line charts for trends, donut rings for goal tracking, and bar charts for daily activity comparisons.
             </p>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85]">
               Each chart type was defined with a colour role system, accessible contrast ratios, and interaction states — ensuring that data communicated meaning even on the smallest screen in the product ecosystem.
@@ -397,7 +398,7 @@ export function JIODesignStudy() {
         </FadeUp>
         <FadeUp delay={0.1} className="mb-10">
           <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] max-w-2xl">
-            For JIO's streaming platform, I explored ambient lighting — an AR concept that extends the on-screen content into the physical room through dynamic background colour. Each theme was derived from the JIO colour system and validated against the brand's accessibility standards.
+            For JIO's streaming platform, I contributed to exploring ambient lighting — an AR concept that extends the on-screen content into the physical room through dynamic background colour — working within the design system's colour framework and accessibility standards.
           </p>
         </FadeUp>
         <div className="grid md:grid-cols-3 gap-[2px]">
@@ -437,10 +438,10 @@ export function JIODesignStudy() {
                 One token layer. Every surface.
               </h2>
               <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] max-w-2xl mb-6">
-                The core architectural decision was a semantic token layer that sat between raw colour values and component usage. Instead of hardcoding colours per platform, every component referenced a semantic role — <code className="font-['DM_Mono',monospace] text-[#C8A96E] text-[12px]">color.interactive.primary</code>, <code className="font-['DM_Mono',monospace] text-[#C8A96E] text-[12px]">color.surface.elevated</code> — that resolved differently per platform and mode.
+                The core architectural decision behind System of Interaction (SOI) was a semantic token layer that sat between raw colour values and component usage. Instead of hardcoding colours per platform, every component referenced a semantic role — <code className="font-['DM_Mono',monospace] text-[#C8A96E] text-[12px]">color.interactive.primary</code>, <code className="font-['DM_Mono',monospace] text-[#C8A96E] text-[12px]">color.surface.elevated</code> — that resolved differently per platform and mode.
               </p>
               <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] max-w-2xl mb-10">
-                This meant a single token update could propagate consistently across watch, TV, mobile, and web simultaneously — cutting the effort for mode switches, rebrands, and new platform rollouts from weeks to hours.
+                Working closely with the system's architects and engineering partners, I implemented and extended this pattern across the surfaces I owned — so a single token update could propagate consistently across watch, TV, mobile, and web, cutting the effort for mode switches, rebrands, and new platform rollouts from weeks to hours.
               </p>
               <div className="grid sm:grid-cols-3 gap-[1px] bg-white/[0.07] max-w-xl">
                 {[

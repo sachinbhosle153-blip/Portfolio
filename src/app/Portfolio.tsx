@@ -4,7 +4,6 @@ import resumeUrl from "../imports/Sachin_Bhosle_Resume_v3.pdf?url";
 import profileUrl from "../imports/profile.jpg";
 import miLogoUrl from "../imports/image.png";
 import jioDesignUrl from "../imports/image-1.png";
-import jioDesign2Url from "../imports/image-3.png";
 import type { ReactNode, CSSProperties, FormEvent } from "react";
 import { motion, useScroll, useTransform, useInView } from "motion/react";
 import {
@@ -13,10 +12,11 @@ import {
   Phone,
   Linkedin,
   ExternalLink,
-  Github,
   X,
   Menu,
   Plus,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -24,6 +24,7 @@ import {
 const PROJECTS = [
   {
     id: 1,
+    path: "/projects/mumbai-indians",
     title: "Mumbai Indians Intelligence Platform",
     role: "Sole Designer — End-to-End Redesign",
     year: "2023",
@@ -34,28 +35,31 @@ const PROJECTS = [
       "Sole designer on a ground-up redesign covering information architecture, a modern visual system, and a multi-league role-switching system — enabling staff across MI, MI Capetown, MI Emirates, and 3 other franchises to shift context in real time without re-authentication.",
     metric: "45 → 500+ users · 10× growth · 6 global franchises",
     photo: "1540747913346-19e32dc3e97e",
+    thumb: "logo",
     tags: ["Sports Intelligence", "AI/ML", "Data Viz"],
   },
   {
     id: 3,
-    title: "JIO Design System — Architecture & Rollout",
-    role: "Design System Architect",
+    path: "/projects/jio-design-system",
+    title: "JIO Design System — System of Interaction (SOI)",
+    role: "Product Designer · Core Contributor",
     year: "2024",
     category: "Design Systems · JIO Platforms AI",
     problem:
       "Multiple internal product teams at JIO AI were building independently with no shared component library, design tokens, or documentation standards — creating inconsistency at scale.",
     outcome:
-      "Served as Design System Architect for the JIO Design System — defining component libraries, design tokens, and documentation standards adopted across multiple internal product teams.",
+      "Core contributor to the team building System of Interaction (SOI) — JIO's design system — helping standardize component libraries, design tokens, and documentation adopted across multiple internal product teams.",
     metric: "Adopted across 20+ product teams · Single source of truth",
     photo: "1551288049-bebda4e38f71",
+    thumb: "image",
     tags: ["Design Systems", "Tokens", "Documentation"],
   },
 ];
 
 const ARCHIVE = [
+  { title: "Leegality — Document Workflow Platform", year: "2024–Present", category: "B2B SaaS · Legal Tech · Solo Designer", metric: "Lakhs of active users · Continuously shipping" },
   { title: "JIO AR Design Prototypes", year: "2023", category: "AR · Consumer · JIO", metric: "Enhanced consumer engagement" },
   { title: "JIO Fintech Product UX", year: "2022", category: "Fintech · AI/ML", metric: "ML outputs made accessible" },
-  { title: "Leegality Usability Testing Programme", year: "2024", category: "UX Research · Legal Tech", metric: "Continuous friction reduction" },
   { title: "JIO Media — Interactive UI Motion", year: "2023", category: "Motion Design · Media", metric: "Shipped to consumer-facing JIO" },
 ];
 
@@ -65,12 +69,12 @@ const EXPERIENCE = [
     company: "Leegality",
     role: "Product Design Manager",
     description:
-      "Leading end-to-end UX strategy for complex B2B document workflow and e-signature solutions, serving enterprise clients across web and mobile.",
+      "Owning UX strategy and design system direction for complex B2B document workflow and e-signature products — balancing enterprise client needs against engineering velocity.",
     points: [
-      "Built and maintained a scalable design system — unifying visual language and cutting handoff cycles significantly",
-      "Ran usability testing and stakeholder feedback loops to reduce friction on high-frequency legal tasks",
-      "Integrated AI agents (Claude, ChatGPT, Grok) and vibe coding — prototyping and committing code via Git",
-      "Collaborated cross-functionally with product, engineering, and QA for pixel-perfect, accessible execution",
+      "Standardized the design system across product lines — reducing inconsistency and accelerating design-to-dev handoff",
+      "Reduced friction on high-frequency legal workflows by running structured usability testing and closing the loop with stakeholders every release",
+      "Accelerated prototyping by integrating AI agents (Claude, ChatGPT, Grok) directly into the workflow — shipping closer to production-ready code",
+      "Influenced engineering and QA trade-offs cross-functionally to protect accessibility and precision under delivery pressure",
     ],
   },
   {
@@ -78,32 +82,53 @@ const EXPERIENCE = [
     company: "JIO Platforms — Artificial Intelligence",
     role: "UX Designer",
     description:
-      "Designed AI-powered product experiences across 5+ major projects in fintech, media, and sports intelligence — translating complex ML outputs into intuitive, accessible interfaces.",
+      "Owned design decisions across 5+ AI-powered initiatives in fintech, media, and sports intelligence — translating complex ML outputs into interfaces coaching staff and consumers could trust and use daily.",
     points: [
-      "Design System Architect for the JIO Design System — components, tokens, and documentation across teams",
-      "Led full redesign of Mumbai Indians Intelligence Platform: 45 → 500+ users, 10× growth, 6 franchises",
-      "Delivered AR design prototypes and interactive UI motion concepts for consumer-facing JIO experiences",
-      "Full design lifecycle on every project: research, wireframing, prototyping, responsive design, UX writing",
+      "Core contributor to System of Interaction (SOI), JIO's design system — helped standardize components, tokens, and documentation adopted across 20+ product teams",
+      "Helped scale the Mumbai Indians Intelligence Platform from 45 to 500+ daily users (10×) by rebuilding the information architecture and removing re-authentication friction across 6 franchises",
+      "Extended the same design language into AR and motion prototypes — proving it could scale beyond core product screens",
+      "Ran full-cycle research-to-ship ownership on every project — using research and usability data to prioritize what shipped, not just how it looked",
     ],
   },
 ];
 
 const SKILLS = [
-  { name: "UX Research & Strategy", desc: "Wireframing, usability testing, and stakeholder feedback loops that drive continuous product improvement.", glyph: "◐" },
-  { name: "Interaction & Visual Design", desc: "High-fidelity prototyping, motion concepts, and pixel-perfect execution from concept to developer handoff.", glyph: "▣" },
-  { name: "Design Systems", desc: "Component libraries, design tokens, and documentation standards that scale across multiple product teams.", glyph: "⊞" },
-  { name: "AI-Augmented Workflows", desc: "Claude, ChatGPT, Grok, and Emergent integrated into daily practice — faster iteration, production-ready outputs.", glyph: "◈" },
-  { name: "Vibe Coding & Git", desc: "Prototypes committed via Git and shipped closer to production quality through hands-on engineering collaboration.", glyph: "◎" },
+  { name: "Product Strategy & Research", desc: "Translating ambiguous business problems into research-backed decisions — prioritizing what to build based on user friction and business impact.", glyph: "◐" },
+  { name: "Interaction & Visual Design", desc: "High-fidelity prototyping and pixel-perfect execution — built to move fast through engineering handoff, not just look polished.", glyph: "▣" },
+  { name: "Design Systems & Scalability", desc: "Component libraries, design tokens, and documentation standards built once and reused across squads — reducing duplicate work at scale.", glyph: "⊞" },
+  { name: "AI-Augmented Workflows", desc: "Claude, ChatGPT, Grok, and Emergent integrated into daily practice — accelerating iteration and closing the gap between design and shippable code.", glyph: "◈" },
+  { name: "Engineering Collaboration & Git", desc: "Prototypes committed via Git and shipped close to production quality — reducing back-and-forth with engineering.", glyph: "◎" },
   { name: "Figma & Toolchain", desc: "Figma, Framer, Rive, Adobe Suite, Blender, Midjourney, and Figma Make — the full modern design toolchain.", glyph: "⬡" },
   { name: "AR & Motion Design", desc: "AR prototypes and interactive UI motion concepts shipped across consumer-facing JIO experiences.", glyph: "◉" },
-  { name: "Domain Expertise", desc: "Legal-tech, fintech, sports intelligence, AI/ML products, and B2B SaaS — each with distinct UX constraints.", glyph: "◈" },
+  { name: "Domain Expertise", desc: "Legal-tech, fintech, sports intelligence, AI/ML, and B2B SaaS — each with distinct business constraints, compliance needs, and revenue models.", glyph: "◈" },
 ];
 
 const ACHIEVEMENTS = [
   { value: "4.6", label: "Years of Experience", sub: "Jio Platforms & Leegality" },
   { value: "10+", label: "Products Shipped", sub: "From 0→1 and at scale" },
   { value: "4", label: "Design Systems Built", sub: "Used across multiple squads" },
-  { value: "4L+", label: "Users Reached", sub: "Consumer and enterprise products" },
+  { value: "10M+", label: "Users Reached", sub: "Consumer and enterprise products" },
+];
+
+const DOMAINS = [
+  {
+    label: "B2B",
+    title: "Enterprise & B2B",
+    desc: "Internal and enterprise tools built for coaching staff, product teams, and legal workflows — where trust, compliance, and precision under complexity are non-negotiable.",
+    examples: ["Mumbai Indians Intelligence Platform", "JIO Design System (SOI)", "Leegality Document Workflows"],
+  },
+  {
+    label: "SaaS",
+    title: "B2B SaaS",
+    desc: "Subscription software solving recurring workflow problems at scale — designed for daily retention, not a one-time impression.",
+    examples: ["Leegality — e-signature & workflow SaaS"],
+  },
+  {
+    label: "B2C",
+    title: "Consumer",
+    desc: "Consumer-facing products used by millions — where every interaction needs to be immediately intuitive, with zero onboarding friction.",
+    examples: ["JIO Fintech Product UX", "JIO AR Prototypes", "JIO Media — Interactive UI Motion"],
+  },
 ];
 
 const TESTIMONIALS = [
@@ -259,7 +284,7 @@ function Hero() {
       <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative z-10 text-center px-6 max-w-6xl mx-auto w-full">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="flex items-center justify-center gap-4 mb-12">
           <div className="w-10 h-px bg-accent/50" />
-          <SectionLabel>Product Design Manager · AI-Augmented UX · Design Systems</SectionLabel>
+          <SectionLabel>Product Design Manager · Design Systems at Scale · AI-Augmented Workflows</SectionLabel>
           <div className="w-10 h-px bg-accent/50" />
         </motion.div>
 
@@ -271,7 +296,7 @@ function Hero() {
 
         <div className="overflow-hidden mb-14">
           <motion.p initial={{ y: "110%" }} animate={{ y: "0%" }} transition={{ duration: 1, delay: 0.55, ease: [0.16, 1, 0.3, 1] }} className="font-['Plus_Jakarta_Sans',sans-serif] font-light text-white/65 max-w-md mx-auto leading-relaxed" style={{ fontSize: "clamp(1rem, 1.8vw, 1.2rem)" }}>
-            4+ years delivering end-to-end UX for AI products, legal tech, and sports intelligence — where craft meets code.
+            4+ years turning ambiguous 0→1 problems into design systems and products that scale — across AI platforms, legal tech, and sports intelligence.
           </motion.p>
         </div>
 
@@ -300,7 +325,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="about" className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-[380px_1fr] gap-20 xl:gap-28 items-start">
         <FadeUp>
           <div className="lg:sticky lg:top-28">
@@ -312,13 +337,12 @@ function About() {
               </div>
             </div>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/70 leading-[1.8] mb-7">
-              Product Design Manager with 4+ years delivering end-to-end UX for B2B SaaS, AI-powered platforms, and enterprise products. Currently at Leegality, previously at JIO Platforms AI — spanning legal-tech, fintech, sports intelligence, and AI/ML. Distinctive edge in AI-augmented workflows and vibe coding.
+              Product Design Manager with 4+ years turning ambiguous 0→1 problems into systems that scale — from a legacy tool stuck at 45 users to a platform running across 6 franchises, to a design system adopted by 20+ product teams. Currently at Leegality, previously at JIO Platforms AI, working across legal-tech, fintech, and sports intelligence — increasingly using AI-agent-assisted workflows to ship faster without losing craft.
             </p>
             <div className="flex gap-3">
               {[
                 { icon: <Linkedin size={13} />, href: "https://linkedin.com/in/sachin-bhosle-1810/" },
                 { icon: <ExternalLink size={13} />, href: "https://behance.net/bhoslesachin" },
-                { icon: <Github size={13} />, href: "#" },
                 { icon: <Mail size={13} />, href: "#contact" },
               ].map((item, i) => (
                 <a key={i} href={item.href} className="w-9 h-9 border border-white/15 flex items-center justify-center text-white/55 hover:border-accent/50 hover:text-accent transition-all duration-300">{item.icon}</a>
@@ -361,18 +385,66 @@ function About() {
   );
 }
 
+// ─── Domains ──────────────────────────────────────────────────────────────────
+
+function Domains() {
+  return (
+    <section id="domains" className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
+      <FadeUp className="mb-16 text-center">
+        <SectionLabel>Business Range</SectionLabel>
+        <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)" }}>
+          Shipped across B2B, SaaS &amp; B2C
+        </DisplayHeading>
+        <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/60 max-w-lg mx-auto leading-[1.8] mt-5">
+          Every business model comes with its own constraints — compliance for enterprise, retention for SaaS, zero-friction onboarding for consumer. I&apos;ve designed for all three.
+        </p>
+      </FadeUp>
+      <div className="grid sm:grid-cols-3 gap-[1px] bg-white/[0.05]">
+        {DOMAINS.map((domain, i) => (
+          <FadeUp key={domain.label} delay={i * 0.1}>
+            <div className="group bg-[#09090B] hover:bg-[#0F0F13] transition-all duration-500 p-9 h-full relative overflow-hidden">
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ background: "radial-gradient(circle at 30% 30%, rgba(200,169,110,0.07), transparent 70%)" }}
+              />
+              <div className="relative">
+                <span
+                  className="inline-block font-['DM_Mono',monospace] text-[10px] tracking-[0.25em] text-accent uppercase px-3 py-1.5 border border-accent/30 mb-6"
+                >
+                  {domain.label}
+                </span>
+                <h3 className="font-['Fraunces',serif] font-light text-white text-[1.4rem] mb-4 leading-snug">
+                  {domain.title}
+                </h3>
+                <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[12px] text-white/60 leading-[1.8] mb-7">
+                  {domain.desc}
+                </p>
+                <ul className="flex flex-col gap-2.5">
+                  {domain.examples.map((ex) => (
+                    <li key={ex} className="flex items-start gap-2.5 font-['Plus_Jakarta_Sans',sans-serif] text-[11px] text-white/50">
+                      <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: "rgba(200,169,110,0.6)" }} />
+                      {ex}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </FadeUp>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ─── Projects ─────────────────────────────────────────────────────────────────
 
 function Projects() {
   const [showArchive, setShowArchive] = useState(false);
-  const [featured, ...rest] = PROJECTS;
-  const jioProject = rest.find((p) => p.id === 3)!;
-  const compactProjects = rest.filter((p) => p.id !== 3);
 
   return (
-    <section id="work" className="py-36" style={{ background: "#070709" }}>
+    <section id="work" className="py-16" style={{ background: "#070709" }}>
       <div className="px-6 md:px-12 max-w-7xl mx-auto">
-        <FadeUp className="mb-16 flex items-end justify-between flex-wrap gap-6">
+        <FadeUp className="mb-12 flex items-end justify-between flex-wrap gap-6">
           <div>
             <SectionLabel>Selected Work</SectionLabel>
             <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)" }}>
@@ -384,123 +456,55 @@ function Projects() {
           </p>
         </FadeUp>
 
-        {/* Mumbai Indians hero card */}
-        <FadeUp className="mb-[2px]">
-          <Link to="/projects/mumbai-indians" className="group relative overflow-hidden cursor-pointer block" style={{ background: "#001A40" }}>
-            <div className="flex flex-col md:flex-row">
-              <div className="relative md:w-1/2 flex items-center justify-center py-16 px-12" style={{ minHeight: "320px" }}>
-                <div className="absolute inset-0 opacity-10" style={{ background: "radial-gradient(circle at 60% 50%, #0057B8 0%, transparent 70%)" }} />
-                <img src={miLogoUrl} alt="Mumbai Indians" className="relative z-10 w-64 md:w-72 object-contain drop-shadow-2xl group-hover:scale-[1.03] transition-transform duration-700" />
-              </div>
-              <div className="md:w-1/2 flex flex-col justify-center p-10 lg:p-14 border-t md:border-t-0 md:border-l border-white/[0.07]">
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="font-['DM_Mono',monospace] text-[10px] text-accent/70 tracking-widest">{featured.year}</span>
-                  <span className="w-1 h-1 rounded-full bg-white/20" />
-                  <span className="font-['DM_Mono',monospace] text-[10px] text-white/60 tracking-wide">{featured.category}</span>
-                </div>
-                <h3 className="font-['Fraunces',serif] font-light text-white leading-[1.05] mb-3" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>{featured.title}</h3>
-                <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[11px] text-accent/80 mb-6 font-medium tracking-[0.12em] uppercase">{featured.role}</p>
-                <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/65 leading-[1.75] mb-7">{featured.outcome}</p>
-                <div className="flex items-center justify-between">
-                  <span className="font-['DM_Mono',monospace] text-[12px] text-accent tracking-widest">{featured.metric}</span>
-                  <div className="flex items-center gap-2 text-white/30 group-hover:text-accent transition-colors duration-300">
-                    <span className="font-['DM_Mono',monospace] text-[10px] tracking-widest uppercase">View Case Study</span>
-                    <ArrowUpRight size={12} />
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-5">
-                  {featured.tags.map((t) => (
-                    <span key={t} className="font-['DM_Mono',monospace] text-[9px] px-3 py-1.5 border border-white/[0.1] text-white/50 tracking-widest uppercase">{t}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Link>
-        </FadeUp>
+        {/* Project list */}
+        <div className="border-t border-white/[0.07]">
+          {PROJECTS.map((project, i) => (
+            <FadeUp key={project.id} delay={i * 0.08}>
+              <Link
+                to={project.path}
+                className="group relative flex items-center gap-5 md:gap-8 py-7 md:py-8 px-2 -mx-2 border-b border-white/[0.07] hover:bg-white/[0.03] transition-colors duration-300"
+              >
+                <span className="hidden sm:block font-['DM_Mono',monospace] text-[11px] text-white/25 tabular-nums w-6 shrink-0 group-hover:text-accent/60 transition-colors duration-300">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
 
-        {/* JIO Design System hero card */}
-        <FadeUp className="mt-[2px]">
-          <Link to="/projects/jio-design-system" className="group relative overflow-hidden cursor-pointer block" style={{ background: "#0D0D10" }}>
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/2 flex flex-col justify-center p-10 lg:p-14 border-b md:border-b-0 md:border-r border-white/[0.07]">
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="font-['DM_Mono',monospace] text-[10px] text-accent/70 tracking-widest">{jioProject.year}</span>
-                  <span className="w-1 h-1 rounded-full bg-white/20" />
-                  <span className="font-['DM_Mono',monospace] text-[10px] text-white/60 tracking-wide">{jioProject.category}</span>
+                <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden rounded-[3px]" style={{ background: project.thumb === "logo" ? "#001A40" : "#0D0D10" }}>
+                  {project.thumb === "logo" ? (
+                    <img src={miLogoUrl} alt="" className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <img src={jioDesignUrl} alt="" className="w-full h-full object-cover opacity-70 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500" style={{ backgroundSize: "300% auto", backgroundPosition: "50% center" }} />
+                  )}
                 </div>
-                <h3 className="font-['Fraunces',serif] font-light text-white leading-[1.05] mb-3" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>{jioProject.title}</h3>
-                <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[11px] text-accent/80 mb-6 font-medium tracking-[0.12em] uppercase">{jioProject.role}</p>
-                <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/65 leading-[1.75] mb-7">{jioProject.outcome}</p>
-                <div className="flex items-center justify-between">
-                  <span className="font-['DM_Mono',monospace] text-[12px] text-accent tracking-widest">{jioProject.metric}</span>
-                  <div className="flex items-center gap-2 text-white/30 group-hover:text-accent transition-colors duration-300">
-                    <span className="font-['DM_Mono',monospace] text-[10px] tracking-widest uppercase">View Case Study</span>
-                    <ArrowUpRight size={12} />
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-5">
-                  {jioProject.tags.map((t) => (
-                    <span key={t} className="font-['DM_Mono',monospace] text-[9px] px-3 py-1.5 border border-white/[0.1] text-white/50 tracking-widest uppercase">{t}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="md:w-1/2 relative flex items-center justify-center py-10 px-8 overflow-hidden" style={{ minHeight: "320px", background: "#0A0A0F" }}>
-                <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at 60% 50%, rgba(200,169,110,0.12) 0%, transparent 70%)" }} />
-                {/* image-3 — large flat display behind */}
-                <img
-                  src={jioDesign2Url}
-                  alt="JIO Design System — colour tokens"
-                  className="absolute inset-0 w-full h-full object-cover opacity-10"
-                />
-                {/* Three cropped panels from image-1 in front */}
-                <div className="relative flex items-end justify-center" style={{ height: "260px", width: "100%" }}>
-                  {[
-                    { pos: "0% center", rotate: "-6deg", bottom: "0px", width: "28%", shadow: "0 16px 40px rgba(0,0,0,0.7)" },
-                    { pos: "50% center", rotate: "0deg", bottom: "16px", width: "32%", shadow: "0 20px 48px rgba(0,0,0,0.8)" },
-                    { pos: "100% center", rotate: "6deg", bottom: "0px", width: "28%", shadow: "0 16px 40px rgba(0,0,0,0.7)" },
-                  ].map((panel, pi) => (
-                    <div key={pi} className="absolute overflow-hidden rounded-[4px] group-hover:scale-[1.02] transition-transform duration-700" style={{ width: panel.width, aspectRatio: "9/16", transform: `rotate(${panel.rotate})`, bottom: panel.bottom, left: pi === 0 ? "8%" : pi === 1 ? "34%" : "auto", right: pi === 2 ? "8%" : "auto", boxShadow: panel.shadow, zIndex: pi === 1 ? 20 : 10 }}>
-                      <div className="w-full h-full" style={{ backgroundImage: `url(${jioDesignUrl})`, backgroundSize: "300% auto", backgroundPosition: panel.pos, backgroundRepeat: "no-repeat" }} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Link>
-        </FadeUp>
 
-        {/* Compact cards */}
-        <div className="grid md:grid-cols-2 gap-[2px] mt-[2px]">
-          {compactProjects.map((project, i) => (
-            <FadeUp key={project.id} delay={i * 0.1}>
-              <div className="group bg-[#0A0A0C] hover:bg-[#0F0F13] transition-colors duration-400 cursor-pointer h-full flex flex-col">
-                <div className="relative overflow-hidden bg-[#111115]" style={{ aspectRatio: "16/7" }}>
-                  <img src={`https://images.unsplash.com/photo-${project.photo}?w=800&h=350&fit=crop&auto=format`} alt={project.title} className="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-[1.03] transition-all duration-700" />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,10,12,0.7) 0%, transparent 60%)" }} />
-                </div>
-                <div className="p-8 flex flex-col flex-1 justify-between">
-                  <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="font-['DM_Mono',monospace] text-[10px] text-accent/70 tracking-widest">{project.year}</span>
-                      <span className="w-1 h-1 rounded-full bg-white/20" />
-                      <span className="font-['DM_Mono',monospace] text-[10px] text-white/55 tracking-wide">{project.category}</span>
-                    </div>
-                    <h3 className="font-['Fraunces',serif] font-light text-white text-[1.35rem] leading-tight mb-2">{project.title}</h3>
-                    <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[11px] text-accent/75 font-medium tracking-[0.12em] uppercase mb-5">{project.role}</p>
-                    <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/60 leading-[1.75]">{project.outcome}</p>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-1.5">
+                    <span className="font-['DM_Mono',monospace] text-[10px] text-accent/70 tracking-widest">{project.year}</span>
+                    <span className="w-1 h-1 rounded-full bg-white/20 shrink-0" />
+                    <span className="font-['DM_Mono',monospace] text-[10px] text-white/50 tracking-wide truncate">{project.category}</span>
                   </div>
-                  <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-5">
-                    <span className="font-['DM_Mono',monospace] text-[11px] text-accent tracking-widest">{project.metric}</span>
-                    <ArrowUpRight size={14} className="text-white/20 group-hover:text-accent transition-colors duration-300" />
-                  </div>
+                  <h3
+                    className="font-['Fraunces',serif] font-light text-white leading-tight truncate group-hover:text-accent transition-colors duration-300"
+                    style={{ fontSize: "clamp(1.15rem, 2.2vw, 1.6rem)" }}
+                  >
+                    {project.title}
+                  </h3>
+                  <p className="hidden md:block font-['Plus_Jakarta_Sans',sans-serif] text-[11px] text-white/50 tracking-wide mt-1 truncate">{project.role}</p>
                 </div>
-              </div>
+
+                <span className="hidden lg:block font-['DM_Mono',monospace] text-[11px] text-accent/80 tracking-widest text-right shrink-0 max-w-[200px]">
+                  {project.metric}
+                </span>
+
+                <div className="shrink-0 w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/40 group-hover:text-accent group-hover:border-accent/50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                  <ArrowUpRight size={16} />
+                </div>
+              </Link>
             </FadeUp>
           ))}
         </div>
 
         {/* Archive */}
-        <FadeUp className="mt-16 border-t border-white/[0.07] pt-10">
+        <FadeUp className="pt-10">
           <button onClick={() => setShowArchive(!showArchive)} className="group flex items-center gap-3">
             <SectionLabel>{showArchive ? "Collapse" : "View"} Archive</SectionLabel>
             <motion.div animate={{ rotate: showArchive ? 45 : 0 }} transition={{ duration: 0.3 }} className="w-[22px] h-[22px] border border-white/20 flex items-center justify-center group-hover:border-accent/45 transition-colors">
@@ -532,10 +536,10 @@ function Projects() {
 
 function Expertise() {
   return (
-    <section id="expertise" className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
-      <FadeUp className="mb-20">
+    <section id="expertise" className="px-6 md:px-12 max-w-7xl mx-auto">
+      <FadeUp className="mt-10 mb-10">
         <SectionLabel>Expertise</SectionLabel>
-        <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)" }}>The full stack<br />of design</DisplayHeading>
+        <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)" }}>The full stack of design</DisplayHeading>
       </FadeUp>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.05]">
         {SKILLS.map((skill, i) => (
@@ -587,7 +591,7 @@ function Philosophy() {
 
 function Achievements() {
   return (
-    <section className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
+    <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
       <FadeUp className="mb-16">
         <SectionLabel>Impact</SectionLabel>
         <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2rem, 3.8vw, 3.2rem)" }}>Numbers that matter</DisplayHeading>
@@ -613,13 +617,13 @@ function Testimonials() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="py-36" style={{ background: "#070709" }}>
+    <section className="py-16" style={{ background: "#070709" }}>
       <div className="px-6 md:px-12 max-w-4xl mx-auto">
         <FadeUp className="mb-16 text-center">
           <SectionLabel>Social Proof</SectionLabel>
           <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2rem, 3.8vw, 3.2rem)" }}>What colleagues say</DisplayHeading>
         </FadeUp>
-        <div className="relative min-h-[320px] mb-12">
+        <div className="relative min-h-[260px] mb-12">
           {TESTIMONIALS.map((t, i) => (
             <motion.div key={i} initial={false} animate={{ opacity: active === i ? 1 : 0, y: active === i ? 0 : 18 }} transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }} className={`absolute inset-0 ${active === i ? "pointer-events-auto" : "pointer-events-none"}`}>
               <blockquote className="font-['Fraunces',serif] font-light text-white/85 leading-[1.35] mb-10" style={{ fontSize: "clamp(1.1rem, 2.4vw, 1.55rem)" }}>&ldquo;{t.quote}&rdquo;</blockquote>
@@ -633,10 +637,28 @@ function Testimonials() {
             </motion.div>
           ))}
         </div>
-        <div className="flex items-center gap-3">
-          {TESTIMONIALS.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)} className="h-[1px] transition-all duration-500" style={{ width: active === i ? "48px" : "20px", background: active === i ? "#C8A96E" : "rgba(255,255,255,0.3)" }} />
-          ))}
+        <div className="flex items-center gap-6">
+          <button
+            aria-label="Previous testimonial"
+            onClick={() => setActive((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
+            className="group w-9 h-9 shrink-0 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-accent hover:border-accent/50 transition-all duration-300"
+          >
+            <ChevronLeft size={15} />
+          </button>
+          <div className="flex items-center gap-3">
+            {TESTIMONIALS.map((_, i) => (
+              <button key={i} aria-label={`Show testimonial ${i + 1}`} onClick={() => setActive(i)} className="py-2 -my-2 px-0.5">
+                <span className="block h-[2px] transition-all duration-500" style={{ width: active === i ? "48px" : "20px", background: active === i ? "#C8A96E" : "rgba(255,255,255,0.3)" }} />
+              </button>
+            ))}
+          </div>
+          <button
+            aria-label="Next testimonial"
+            onClick={() => setActive((i) => (i + 1) % TESTIMONIALS.length)}
+            className="group w-9 h-9 shrink-0 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-accent hover:border-accent/50 transition-all duration-300"
+          >
+            <ChevronRight size={15} />
+          </button>
         </div>
       </div>
     </section>
@@ -647,17 +669,27 @@ function Testimonials() {
 
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: "", email: "", message: "" });
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
-    <section id="contact" className="py-36 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="contact" className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
       <div className="grid md:grid-cols-2 gap-20 xl:gap-32 items-start">
         <FadeUp>
           <SectionLabel>Get In Touch</SectionLabel>
@@ -681,7 +713,7 @@ function Contact() {
           </div>
         </FadeUp>
         <FadeUp delay={0.2}>
-          {sent ? (
+          {status === "sent" ? (
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="py-16 text-center">
               <div className="font-['Fraunces',serif] text-2xl text-white font-light mb-3">Message sent.</div>
               <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/60">Thank you for reaching out. I will be in touch shortly.</p>
@@ -691,16 +723,22 @@ function Contact() {
               {([{ label: "Name", key: "name", type: "text", ph: "Your name" }, { label: "Email", key: "email", type: "email", ph: "your@email.com" }] as const).map((f) => (
                 <div key={f.key}>
                   <label className="font-['DM_Mono',monospace] text-[9px] text-white/50 tracking-[0.28em] uppercase block mb-3">{f.label}</label>
-                  <input type={f.type} placeholder={f.ph} value={form[f.key]} onChange={(e) => setForm((prev) => ({ ...prev, [f.key]: e.target.value }))} className="w-full bg-transparent border-b border-white/[0.12] focus:border-accent/50 py-3 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/80 placeholder:text-white/30 outline-none transition-colors duration-300" />
+                  <input required type={f.type} placeholder={f.ph} value={form[f.key]} onChange={(e) => setForm((prev) => ({ ...prev, [f.key]: e.target.value }))} className="w-full bg-transparent border-b border-white/[0.12] focus:border-accent/50 py-3 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/80 placeholder:text-white/30 outline-none transition-colors duration-300" />
                 </div>
               ))}
               <div>
                 <label className="font-['DM_Mono',monospace] text-[9px] text-white/50 tracking-[0.28em] uppercase block mb-3">Message</label>
-                <textarea rows={5} placeholder="Tell me about the opportunity..." value={form.message} onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))} className="w-full bg-transparent border-b border-white/[0.12] focus:border-accent/50 py-3 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/80 placeholder:text-white/30 outline-none transition-colors duration-300 resize-none" />
+                <textarea required rows={5} placeholder="Tell me about the opportunity..." value={form.message} onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))} className="w-full bg-transparent border-b border-white/[0.12] focus:border-accent/50 py-3 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/80 placeholder:text-white/30 outline-none transition-colors duration-300 resize-none" />
               </div>
-              <button type="submit" className="group mt-2 self-start flex items-center gap-3 px-8 py-3.5 bg-accent text-[#09090B] font-['Plus_Jakarta_Sans',sans-serif] text-[13px] font-medium tracking-wide hover:bg-[#DFC080] transition-colors duration-300">
-                Send Message <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+              <button type="submit" disabled={status === "sending"} className="group mt-2 self-start flex items-center gap-3 px-8 py-3.5 bg-accent text-[#09090B] font-['Plus_Jakarta_Sans',sans-serif] text-[13px] font-medium tracking-wide hover:bg-[#DFC080] transition-colors duration-300 disabled:opacity-60 disabled:cursor-wait">
+                {status === "sending" ? "Sending…" : "Send Message"}
+                {status !== "sending" && <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />}
               </button>
+              {status === "error" && (
+                <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[12px] text-red-400/80">
+                  Something went wrong sending your message. Please try again, or email me directly at sachinbhosle153@gmail.com.
+                </p>
+              )}
             </form>
           )}
         </FadeUp>
@@ -735,6 +773,7 @@ export function Portfolio() {
       <Nav />
       <Hero />
       <About />
+      <Domains />
       <Projects />
       <Expertise />
       <Philosophy />

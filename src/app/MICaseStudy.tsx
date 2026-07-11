@@ -4,6 +4,11 @@ import { motion, useInView } from "motion/react";
 import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
 import miLogoUrl from "../imports/image.png";
 import jioDesignUrl from "../imports/image-1.png";
+import commandCentreUrl from "../imports/mi-command-centre.png";
+import playerProfileUrl from "../imports/mi-player-profile.png";
+import multiLeagueUrl from "../imports/mi-multi-league.png";
+import valStatsUrl from "../imports/mi-val-stats.png";
+import playerWellnessUrl from "../imports/mi-player-wellness.png";
 
 // ─── Utility ─────────────────────────────────────────────────────────────────
 
@@ -93,21 +98,33 @@ const INSIGHTS = [
 const SCREENS = [
   {
     title: "Command Centre Dashboard",
-    desc: "Real-time match overview with live player metrics, formation data, and performance scores surfaced in a single view. Priority-ranked so the most urgent information reads first.",
-    photo: "1551288049-bebda4e38f71",
+    desc: "Real-time wellness and workload overview with live player metrics, form responses, and upcoming schedules surfaced in a single view. Priority-ranked so the most urgent information reads first.",
+    image: commandCentreUrl,
     tag: "Core Experience",
   },
   {
     title: "Player Performance Profile",
-    desc: "Deep-dive into individual player data across seasons, formats, and opposition. Visualised with progressive charts that reveal trend lines without overwhelming the reader.",
-    photo: "1460925895917-afdab827c52f",
+    desc: "Deep-dive into individual player data — batting style, innings, runs, strike rate — visualised with progressive detail that reveals trend lines without overwhelming the reader.",
+    image: playerProfileUrl,
     tag: "Analytics Layer",
   },
   {
     title: "Multi-League Role Switcher",
-    desc: "The key innovation: a persistent context panel that lets staff shift active league and role without leaving the current screen — no re-authentication, no workflow interruption.",
-    photo: "1518709268805-4e9042af9f23",
+    desc: "The key innovation: a persistent profile panel that lets staff see active league participation and shift context — no re-authentication, no workflow interruption.",
+    image: multiLeagueUrl,
     tag: "System Feature",
+  },
+  {
+    title: "Stats & VAL (Length Variation)",
+    desc: "Lets coaches and players track variation across ball length and delivery stats — full toss, yorker, good length, and full length mapped against a pitch visual for a specific match, not buried in a spreadsheet.",
+    image: valStatsUrl,
+    tag: "Bowling Analytics",
+  },
+  {
+    title: "Player Wellness Dashboard",
+    desc: "Built for the wellness coach — a daily command view combining GPS load (average distance, HSR distance, player load) with peak load trends, daily wellness survey response rates, and player readiness. Readiness and injury-risk are flagged inline against each player so at-risk athletes surface immediately, without digging through raw form data.",
+    image: playerWellnessUrl,
+    tag: "Wellness & Readiness",
   },
 ];
 
@@ -403,15 +420,14 @@ export function MICaseStudy() {
             <FadeUp key={i} delay={i * 0.1}>
               <div className={`group flex flex-col ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-[1px] bg-white/[0.07]`}>
                 {/* Image */}
-                <div className="md:w-3/5 relative overflow-hidden bg-[#0A0A10]" style={{ minHeight: "280px" }}>
+                <div className="md:w-3/5 relative overflow-hidden flex items-center justify-center p-8" style={{ minHeight: "340px", background: "#0A0A10" }}>
+                  <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at 50% 40%, #0057B8 0%, transparent 70%)" }} />
                   <img
-                    src={`https://images.unsplash.com/photo-${screen.photo}?w=900&h=500&fit=crop&auto=format`}
+                    src={screen.image}
                     alt={screen.title}
-                    className="w-full h-full object-cover opacity-55 group-hover:opacity-75 group-hover:scale-[1.03] transition-all duration-700"
-                    style={{ minHeight: "280px" }}
+                    className="relative z-10 max-h-[380px] w-auto object-contain drop-shadow-2xl group-hover:scale-[1.03] transition-transform duration-700"
                   />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,22,48,0.5) 0%, transparent 60%)" }} />
-                  <div className="absolute top-5 left-5">
+                  <div className="absolute top-5 left-5 z-20">
                     <span className="font-['DM_Mono',monospace] text-[9px] px-3 py-1.5 border border-[#C8A96E]/30 text-[#C8A96E]/80 tracking-widest uppercase">
                       {screen.tag}
                     </span>
