@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { Portfolio } from "./Portfolio";
 import { MICaseStudy } from "./MICaseStudy";
 import { JIODesignStudy } from "./JIODesignStudy";
+import { PresolvCaseStudy } from "./PresolvCaseStudy";
 
 export const router = createBrowserRouter([
   {
@@ -15,5 +16,9 @@ export const router = createBrowserRouter([
   {
     path: "/projects/jio-design-system",
     Component: JIODesignStudy,
+  },
+  {
+    path: "/projects/presolv360",
+    Component: PresolvCaseStudy,
   },
 ]);

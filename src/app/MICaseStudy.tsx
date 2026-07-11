@@ -257,7 +257,7 @@ export function MICaseStudy() {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <FadeUp delay={0.1}>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[15px] text-white/65 leading-[1.85] mb-6">
-              The Mumbai Indians coaching and strategy staff were sitting on a goldmine of performance data — but the legacy analytics platform had an adoption rate of just ~45 users. Staff actively avoided it, falling back to spreadsheets and manual research.
+              The Mumbai Indians coaching and strategy staff were sitting on a goldmine of performance data used for decisions with real competitive and financial stakes — auction bids, player scouting, game strategy — but the legacy analytics platform had an adoption rate of just ~45 users. Staff actively avoided it, falling back to spreadsheets and manual research.
             </p>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[15px] text-white/65 leading-[1.85]">
               As the sole designer on this project within JIO Platforms AI, I was responsible for understanding why, and redesigning from the ground up — covering information architecture, visual system, and a first-of-its-kind multi-league role-switching system.
@@ -350,7 +350,7 @@ export function MICaseStudy() {
         <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
           <FadeUp>
             <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] mb-8">
-              The platform was designed using the JIO Design System — a token-based system I served as architect for. This ensured visual consistency with Jio's product ecosystem while allowing the MI platform to have its own distinct identity through colour application and motion.
+              The platform was built on JIO's internal design system — a token-based system I contributed to as a core team member, not its architect. That gave coaching staff the same visual trust signals they already relied on elsewhere in the JIO ecosystem, while still letting the MI platform carry its own identity through colour and motion.
             </p>
             <div className="space-y-4">
               {[
@@ -464,8 +464,11 @@ export function MICaseStudy() {
               <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] max-w-2xl mb-10">
                 Staff managing multiple franchises — MI, MI Capetown, MI Emirates, and others — previously had to log out and log back in when switching between leagues. Each switch destroyed their working context and took 4–6 minutes to restore.
               </p>
-              <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] max-w-2xl mb-10">
+              <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] max-w-2xl mb-6">
                 I designed a persistent context panel — always accessible from the top chrome — that lets users shift active league and role in a single interaction. Permissions update in real time, data refreshes in the background, and the user stays exactly where they were.
+              </p>
+              <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-white/65 leading-[1.85] max-w-2xl mb-10">
+                A simpler account-switcher dropdown would have shipped faster, but staff needed to compare context across leagues mid-conversation, not just reload into a new one — so I chose the heavier, real-time panel over the lighter, cheaper option.
               </p>
               <div className="grid sm:grid-cols-3 gap-[1px] bg-white/[0.07] max-w-xl">
                 {[

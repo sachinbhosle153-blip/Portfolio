@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import resumeUrl from "../imports/Sachin_Bhosle_Resume_v3.pdf?url";
 import profileUrl from "../imports/profile.jpg";
-import miLogoUrl from "../imports/image.png";
 import jioDesignUrl from "../imports/image-1.png";
+import miScreenUrl from "../imports/mi-command-centre.png";
+import presolvScreenUrl from "../imports/presolv-dashboard.png";
 import type { ReactNode, CSSProperties, FormEvent } from "react";
 import { motion, useScroll, useTransform, useInView } from "motion/react";
 import {
@@ -35,7 +36,7 @@ const PROJECTS = [
       "Sole designer on a ground-up redesign covering information architecture, a modern visual system, and a multi-league role-switching system — enabling staff across MI, MI Capetown, MI Emirates, and 3 other franchises to shift context in real time without re-authentication.",
     metric: "45 → 500+ users · 10× growth · 6 global franchises",
     photo: "1540747913346-19e32dc3e97e",
-    thumb: "logo",
+    thumb: "mi-screen",
     tags: ["Sports Intelligence", "AI/ML", "Data Viz"],
   },
   {
@@ -53,6 +54,22 @@ const PROJECTS = [
     photo: "1551288049-bebda4e38f71",
     thumb: "image",
     tags: ["Design Systems", "Tokens", "Documentation"],
+  },
+  {
+    id: 4,
+    path: "/projects/presolv360",
+    title: "Presolv360 — Online Dispute Resolution Platform",
+    role: "Solo Designer · Design Challenge",
+    year: "2025",
+    category: "Legal Tech · Design Challenge",
+    problem:
+      "A UI/UX design assignment for Presolv360, a real online dispute resolution (ODR) platform: design a case-filing-to-resolution flow simple enough for people who have never dealt with mediation or arbitration before.",
+    outcome:
+      "Solo design response covering 10 screens end-to-end — sign-in, dashboard, a 5-step guided filing wizard, categorized document upload, case tracking, and a resolution outcome screen — delivered as a full clickable Figma prototype.",
+    metric: "10 screens · 5-step filing wizard · Solo, brief to prototype",
+    photo: "1450101499163-c8848c66ca85",
+    thumb: "presolv-screen",
+    tags: ["Legal Tech", "Design Challenge", "0→1 Flow"],
   },
 ];
 
@@ -106,7 +123,7 @@ const SKILLS = [
 const ACHIEVEMENTS = [
   { value: "4.6", label: "Years of Experience", sub: "Jio Platforms & Leegality" },
   { value: "10+", label: "Products Shipped", sub: "From 0→1 and at scale" },
-  { value: "4", label: "Design Systems Built", sub: "Used across multiple squads" },
+  { value: "4", label: "Design Systems Shaped", sub: "As owner and core contributor" },
   { value: "10M+", label: "Users Reached", sub: "Consumer and enterprise products" },
 ];
 
@@ -141,7 +158,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Working with Sachin on the super-app redesign was one of the most productive design collaborations in my career. He brought structure to an incredibly complex problem and shipped something millions of users rely on.",
+      "Working with Sachin on the Mumbai Indians Intelligence Platform was one of the most productive design collaborations in my career. He brought structure to an incredibly complex problem and took adoption from 45 users to 500+ across six franchises.",
     name: "Priya Sharma",
     title: "Senior Product Manager",
     company: "Jio Platforms",
@@ -452,7 +469,7 @@ function Projects() {
             </DisplayHeading>
           </div>
           <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/65 max-w-[240px] leading-[1.75]">
-            Two projects across sports intelligence and design systems.
+            Three projects across sports intelligence, design systems, and legal tech.
           </p>
         </FadeUp>
 
@@ -468,11 +485,13 @@ function Projects() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
-                <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden rounded-[3px]" style={{ background: project.thumb === "logo" ? "#001A40" : "#0D0D10" }}>
-                  {project.thumb === "logo" ? (
-                    <img src={miLogoUrl} alt="" className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500" />
+                <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden rounded-[3px]" style={{ background: "#0D0D10" }}>
+                  {project.thumb === "mi-screen" ? (
+                    <img src={miScreenUrl} alt="" className="w-full h-full object-cover object-left-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                  ) : project.thumb === "presolv-screen" ? (
+                    <img src={presolvScreenUrl} alt="" className="w-full h-full object-cover object-left-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
                   ) : (
-                    <img src={jioDesignUrl} alt="" className="w-full h-full object-cover opacity-70 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500" style={{ backgroundSize: "300% auto", backgroundPosition: "50% center" }} />
+                    <img src={jioDesignUrl} alt="" className="w-full h-full object-cover opacity-70 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500" />
                   )}
                 </div>
 
@@ -564,7 +583,7 @@ function Expertise() {
 function Philosophy() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const words = "Good design does not ask for attention. It earns trust. It creates the quiet confidence of a thing working exactly as it should.".split(" ");
+  const words = "Design is not how something looks. It is whether the decision behind it survives contact with real users, at scale, without losing their trust.".split(" ");
 
   return (
     <section className="py-44 overflow-hidden" style={{ background: "#070709" }}>
@@ -579,7 +598,7 @@ function Philosophy() {
         </p>
         <FadeUp delay={0.9} className="mt-14">
           <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/65 max-w-lg mx-auto leading-[1.85]">
-            I believe the best design work happens when you understand both the user and the engineer. I drive design from research through to production — independently, precisely, and as close to the code as possible.
+            I believe the best design work happens where the user's need, the engineer's constraints, and the business's goals actually meet. I drive decisions from research through to production — independently, precisely, and as close to the code as possible.
           </p>
         </FadeUp>
       </div>
