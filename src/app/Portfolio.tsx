@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import resumeUrl from "../imports/Sachin_Bhosle_Resume_v3.pdf?url";
 import profileUrl from "../imports/profile.jpg";
-import jioDesignUrl from "../imports/image-1.png";
-import miScreenUrl from "../imports/mi-command-centre.png";
-import presolvScreenUrl from "../imports/presolv-dashboard.png";
+import miLogoUrl from "../imports/image.png";
+import presolvLogoUrl from "../imports/presolv-logo-2.jpeg";
+import jioLogoUrl from "../imports/jio-logo.png";
+import tataElxsiLogoUrl from "../imports/tataelxsi-logo.jpeg";
 import type { ReactNode, CSSProperties, FormEvent } from "react";
 import { motion, useScroll, useTransform, useInView } from "motion/react";
 import {
@@ -22,6 +23,13 @@ import {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
+const LOGOS: Record<string, string> = {
+  mi: miLogoUrl,
+  presolv: presolvLogoUrl,
+  jio: jioLogoUrl,
+  tata: tataElxsiLogoUrl,
+};
+
 const PROJECTS = [
   {
     id: 1,
@@ -37,6 +45,7 @@ const PROJECTS = [
     metric: "45 → 500+ users · 10× growth · 6 global franchises",
     photo: "1540747913346-19e32dc3e97e",
     thumb: "mi-screen",
+    logo: "mi",
     tags: ["Sports Intelligence", "AI/ML", "Data Viz"],
   },
   {
@@ -53,6 +62,7 @@ const PROJECTS = [
     metric: "Adopted across 20+ product teams · Single source of truth",
     photo: "1551288049-bebda4e38f71",
     thumb: "image",
+    logo: "jio",
     tags: ["Design Systems", "Tokens", "Documentation"],
   },
   {
@@ -69,7 +79,25 @@ const PROJECTS = [
     metric: "10 screens · 5-step filing wizard · Solo, brief to prototype",
     photo: "1450101499163-c8848c66ca85",
     thumb: "presolv-screen",
+    logo: "presolv",
     tags: ["Legal Tech", "Design Challenge", "0→1 Flow"],
+  },
+  {
+    id: 5,
+    path: "/projects/tata-elxsi-ai-healthcare",
+    title: "AI-Powered System — Redefining Healthcare",
+    role: "Solo Designer · Interview Design Challenge",
+    year: "2023",
+    category: "Healthcare AI · Tata Elxsi · Design Challenge",
+    problem:
+      "An open-ended design challenge: concept a novel, frugal AI application for healthcare that lets doctors, researchers, and patients safely discover, experiment with, and apply AI — with no fixed screen list to follow.",
+    outcome:
+      "Solo design response spanning research through hi-fi prototype — four user types synthesized into two personas, a full 7-section IA, and a working multi-planar medical image experimentation workspace built beyond what the brief required.",
+    metric: "4 personas researched · 7 system sections · Full experimentation sandbox",
+    photo: "1576091160399-112ba8d25d1d",
+    thumb: "tataelxsi-screen",
+    logo: "tata",
+    tags: ["Healthcare AI", "Design Challenge", "0→1 System"],
   },
 ];
 
@@ -89,9 +117,7 @@ const EXPERIENCE = [
       "Owning UX strategy and design system direction for complex B2B document workflow and e-signature products — balancing enterprise client needs against engineering velocity.",
     points: [
       "Standardized the design system across product lines — reducing inconsistency and accelerating design-to-dev handoff",
-      "Reduced friction on high-frequency legal workflows by running structured usability testing and closing the loop with stakeholders every release",
       "Accelerated prototyping by integrating AI agents (Claude, ChatGPT, Grok) directly into the workflow — shipping closer to production-ready code",
-      "Influenced engineering and QA trade-offs cross-functionally to protect accessibility and precision under delivery pressure",
     ],
   },
   {
@@ -103,8 +129,6 @@ const EXPERIENCE = [
     points: [
       "Core contributor to System of Interaction (SOI), JIO's design system — helped standardize components, tokens, and documentation adopted across 20+ product teams",
       "Helped scale the Mumbai Indians Intelligence Platform from 45 to 500+ daily users (10×) by rebuilding the information architecture and removing re-authentication friction across 6 franchises",
-      "Extended the same design language into AR and motion prototypes — proving it could scale beyond core product screens",
-      "Ran full-cycle research-to-ship ownership on every project — using research and usability data to prioritize what shipped, not just how it looked",
     ],
   },
 ];
@@ -127,26 +151,7 @@ const ACHIEVEMENTS = [
   { value: "10M+", label: "Users Reached", sub: "Consumer and enterprise products" },
 ];
 
-const DOMAINS = [
-  {
-    label: "B2B",
-    title: "Enterprise & B2B",
-    desc: "Internal and enterprise tools built for coaching staff, product teams, and legal workflows — where trust, compliance, and precision under complexity are non-negotiable.",
-    examples: ["Mumbai Indians Intelligence Platform", "JIO Design System (SOI)", "Leegality Document Workflows"],
-  },
-  {
-    label: "SaaS",
-    title: "B2B SaaS",
-    desc: "Subscription software solving recurring workflow problems at scale — designed for daily retention, not a one-time impression.",
-    examples: ["Leegality — e-signature & workflow SaaS"],
-  },
-  {
-    label: "B2C",
-    title: "Consumer",
-    desc: "Consumer-facing products used by millions — where every interaction needs to be immediately intuitive, with zero onboarding friction.",
-    examples: ["JIO Fintech Product UX", "JIO AR Prototypes", "JIO Media — Interactive UI Motion"],
-  },
-];
+const MARQUEE_ITEMS = ["B2B", "B2C", "SAAS", "LEGAL", "SPORTS", "AI", "ENTERTAINMENT", "TELECOM"];
 
 const TESTIMONIALS = [
   {
@@ -313,7 +318,7 @@ function Hero() {
 
         <div className="overflow-hidden mb-14">
           <motion.p initial={{ y: "110%" }} animate={{ y: "0%" }} transition={{ duration: 1, delay: 0.55, ease: [0.16, 1, 0.3, 1] }} className="font-['Plus_Jakarta_Sans',sans-serif] font-light text-white/65 max-w-md mx-auto leading-relaxed" style={{ fontSize: "clamp(1rem, 1.8vw, 1.2rem)" }}>
-            4+ years turning ambiguous 0→1 problems into design systems and products that scale — across AI platforms, legal tech, and sports intelligence.
+            ~5 years of experience turning ambiguous 0→1 problems into design systems and products that scale — across AI platforms, legal tech, and sports intelligence.
           </motion.p>
         </div>
 
@@ -353,9 +358,6 @@ function About() {
                 <span className="font-['DM_Mono',monospace] text-[10px] text-accent/80 tracking-[0.25em] uppercase">Bengaluru, India</span>
               </div>
             </div>
-            <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/70 leading-[1.8] mb-7">
-              Product Design Manager with 4+ years turning ambiguous 0→1 problems into systems that scale — from a legacy tool stuck at 45 users to a platform running across 6 franchises, to a design system adopted by 20+ product teams. Currently at Leegality, previously at JIO Platforms AI, working across legal-tech, fintech, and sports intelligence — increasingly using AI-agent-assisted workflows to ship faster without losing craft.
-            </p>
             <div className="flex gap-3">
               {[
                 { icon: <Linkedin size={13} />, href: "https://linkedin.com/in/sachin-bhosle-1810/" },
@@ -371,9 +373,6 @@ function About() {
         <div>
           <FadeUp className="mb-16">
             <SectionLabel>Experience</SectionLabel>
-            <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)" }}>
-              4+ years of<br />intentional craft
-            </DisplayHeading>
           </FadeUp>
           <div className="relative">
             <div className="absolute left-0 top-2 bottom-0 w-px" style={{ background: "linear-gradient(to bottom, rgba(200,169,110,0.55), rgba(200,169,110,0.1), transparent)" }} />
@@ -404,49 +403,26 @@ function About() {
 
 // ─── Domains ──────────────────────────────────────────────────────────────────
 
-function Domains() {
+function Marquee() {
   return (
-    <section id="domains" className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
-      <FadeUp className="mb-16 text-center">
-        <SectionLabel>Business Range</SectionLabel>
-        <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)" }}>
-          Shipped across B2B, SaaS &amp; B2C
-        </DisplayHeading>
-        <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/60 max-w-lg mx-auto leading-[1.8] mt-5">
-          Every business model comes with its own constraints — compliance for enterprise, retention for SaaS, zero-friction onboarding for consumer. I&apos;ve designed for all three.
-        </p>
-      </FadeUp>
-      <div className="grid sm:grid-cols-3 gap-[1px] bg-white/[0.05]">
-        {DOMAINS.map((domain, i) => (
-          <FadeUp key={domain.label} delay={i * 0.1}>
-            <div className="group bg-[#09090B] hover:bg-[#0F0F13] transition-all duration-500 p-9 h-full relative overflow-hidden">
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: "radial-gradient(circle at 30% 30%, rgba(200,169,110,0.07), transparent 70%)" }}
-              />
-              <div className="relative">
+    <section className="relative py-9 overflow-hidden border-y border-white/[0.07]" style={{ background: "#070709" }} aria-hidden="true">
+      <div className="flex w-max animate-marquee">
+        {[0, 1].map((dup) => (
+          <div key={dup} className="flex items-center shrink-0">
+            {MARQUEE_ITEMS.map((item) => (
+              <span key={item} className="flex items-center">
                 <span
-                  className="inline-block font-['DM_Mono',monospace] text-[10px] tracking-[0.25em] text-accent uppercase px-3 py-1.5 border border-accent/30 mb-6"
+                  className="font-['Fraunces',serif] font-light text-white/20 tracking-tight"
+                  style={{ fontSize: "36px" }}
                 >
-                  {domain.label}
+                  {item}
                 </span>
-                <h3 className="font-['Fraunces',serif] font-light text-white text-[1.4rem] mb-4 leading-snug">
-                  {domain.title}
-                </h3>
-                <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[12px] text-white/60 leading-[1.8] mb-7">
-                  {domain.desc}
-                </p>
-                <ul className="flex flex-col gap-2.5">
-                  {domain.examples.map((ex) => (
-                    <li key={ex} className="flex items-start gap-2.5 font-['Plus_Jakarta_Sans',sans-serif] text-[11px] text-white/50">
-                      <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: "rgba(200,169,110,0.6)" }} />
-                      {ex}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </FadeUp>
+                <span className="mx-8 md:mx-12 text-accent/50 select-none" style={{ fontSize: "1rem" }}>
+                  ✦
+                </span>
+              </span>
+            ))}
+          </div>
         ))}
       </div>
     </section>
@@ -469,7 +445,7 @@ function Projects() {
             </DisplayHeading>
           </div>
           <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/65 max-w-[240px] leading-[1.75]">
-            Three projects across sports intelligence, design systems, and legal tech.
+            Four projects across sports intelligence, design systems, legal tech, and healthcare AI.
           </p>
         </FadeUp>
 
@@ -485,15 +461,11 @@ function Projects() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
-                <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden rounded-[3px]" style={{ background: "#0D0D10" }}>
-                  {project.thumb === "mi-screen" ? (
-                    <img src={miScreenUrl} alt="" className="w-full h-full object-cover object-left-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
-                  ) : project.thumb === "presolv-screen" ? (
-                    <img src={presolvScreenUrl} alt="" className="w-full h-full object-cover object-left-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
-                  ) : (
-                    <img src={jioDesignUrl} alt="" className="w-full h-full object-cover opacity-70 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500" />
-                  )}
-                </div>
+                {LOGOS[project.logo] && (
+                  <div className="hidden sm:flex w-11 h-11 md:w-12 md:h-12 shrink-0 items-center justify-center rounded-[3px] bg-white border border-white/10 overflow-hidden p-2">
+                    <img src={LOGOS[project.logo]} alt="" className="w-full h-full object-contain" />
+                  </div>
+                )}
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-1.5">
@@ -579,32 +551,6 @@ function Expertise() {
 }
 
 // ─── Philosophy ───────────────────────────────────────────────────────────────
-
-function Philosophy() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-  const words = "Design is not how something looks. It is whether the decision behind it survives contact with real users, at scale, without losing their trust.".split(" ");
-
-  return (
-    <section className="py-44 overflow-hidden" style={{ background: "#070709" }}>
-      <div className="px-6 md:px-12 max-w-4xl mx-auto text-center" ref={ref}>
-        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5 }} className="mb-14">
-          <SectionLabel>Design Philosophy</SectionLabel>
-        </motion.div>
-        <p className="font-['Fraunces',serif] font-light text-white leading-[1.2] tracking-tight" style={{ fontSize: "clamp(1.9rem, 4.2vw, 3.4rem)" }}>
-          {words.map((word, i) => (
-            <motion.span key={i} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: i * 0.045, ease: [0.16, 1, 0.3, 1] }} className="inline-block mr-[0.22em] mb-1">{word}</motion.span>
-          ))}
-        </p>
-        <FadeUp delay={0.9} className="mt-14">
-          <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/65 max-w-lg mx-auto leading-[1.85]">
-            I believe the best design work happens where the user's need, the engineer's constraints, and the business's goals actually meet. I drive decisions from research through to production — independently, precisely, and as close to the code as possible.
-          </p>
-        </FadeUp>
-      </div>
-    </section>
-  );
-}
 
 // ─── Achievements ─────────────────────────────────────────────────────────────
 
@@ -792,11 +738,10 @@ export function Portfolio() {
       <Nav />
       <Hero />
       <About />
-      <Domains />
+      <Marquee />
       <Projects />
-      <Expertise />
-      <Philosophy />
       <Achievements />
+      <Expertise />
       <Testimonials />
       <Contact />
       <Footer />
