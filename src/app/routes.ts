@@ -4,6 +4,7 @@ import { MICaseStudy } from "./MICaseStudy";
 import { JIODesignStudy } from "./JIODesignStudy";
 import { PresolvCaseStudy } from "./PresolvCaseStudy";
 import { TataElxsiCaseStudy } from "./TataElxsiCaseStudy";
+import { FundriseCaseStudy } from "./FundriseCaseStudy";
 
 export const router = createBrowserRouter([
   {
@@ -25,5 +26,9 @@ export const router = createBrowserRouter([
   {
     path: "/projects/tata-elxsi-ai-healthcare",
     Component: TataElxsiCaseStudy,
+  },
+  {
+    path: "/ideas/fundrise",
+    Component: FundriseCaseStudy,
   },
 ]);

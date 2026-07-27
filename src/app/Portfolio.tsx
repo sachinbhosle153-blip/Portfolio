@@ -17,8 +17,7 @@ import {
   X,
   Menu,
   Plus,
-  ChevronLeft,
-  ChevronRight,
+  Rocket,
 } from "lucide-react";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -101,6 +100,21 @@ const PROJECTS = [
   },
 ];
 
+const IDEAS = [
+  {
+    id: 1,
+    path: "/ideas/fundrise",
+    title: "Fundrise — India's First Prop Trading Firm",
+    role: "Founder · Concept, PRD & Landing Page",
+    year: "2025",
+    category: "FinTech · Prop Trading",
+    outcome:
+      "95% of F&O traders lose money trying to trade with too little capital and no guidance. Fundrise lets them prove their edge in a funded challenge, then trade the firm's capital for up to an 80% profit split.",
+    metric: "80% profit split · ₹2,000 entry · Concept stage",
+    tags: ["FinTech", "Prop Trading", "0→1 Concept"],
+  },
+];
+
 const ARCHIVE = [
   { title: "Leegality — Document Workflow Platform", year: "2024–Present", category: "B2B SaaS · Legal Tech · Solo Designer", metric: "Lakhs of active users · Continuously shipping" },
   { title: "JIO AR Design Prototypes", year: "2023", category: "AR · Consumer · JIO", metric: "Enhanced consumer engagement" },
@@ -152,30 +166,6 @@ const ACHIEVEMENTS = [
 ];
 
 const MARQUEE_ITEMS = ["B2B", "B2C", "SAAS", "LEGAL", "SPORTS", "AI", "ENTERTAINMENT", "TELECOM"];
-
-const TESTIMONIALS = [
-  {
-    quote:
-      "Sachin brings a rare combination of strategic thinking and craft precision. He can hold the big picture and the pixel detail simultaneously — and that is genuinely uncommon.",
-    name: "Karthick AS",
-    title: "Head of Designs",
-    company: "Jio Platforms Limited",
-  },
-  {
-    quote:
-      "Working with Sachin on the Mumbai Indians Intelligence Platform was one of the most productive design collaborations in my career. He brought structure to an incredibly complex problem and took adoption from 45 users to 500+ across six franchises.",
-    name: "Priya Sharma",
-    title: "Senior Product Manager",
-    company: "Jio Platforms",
-  },
-  {
-    quote:
-      "Sachin built a design foundation at Leegality that our engineering team adopted enthusiastically. That kind of cross-functional buy-in is a direct result of how he communicates and collaborates.",
-    name: "Rahul Nair",
-    title: "VP Engineering",
-    company: "Leegality",
-  },
-];
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
@@ -449,45 +439,36 @@ function Projects() {
           </p>
         </FadeUp>
 
-        {/* Project list */}
-        <div className="border-t border-white/[0.07]">
+        {/* Project grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {PROJECTS.map((project, i) => (
-            <FadeUp key={project.id} delay={i * 0.08}>
+            <FadeUp key={project.id} delay={i * 0.08} className="h-full">
               <Link
                 to={project.path}
-                className="group relative flex items-center gap-5 md:gap-8 py-7 md:py-8 px-2 -mx-2 border-b border-white/[0.07] hover:bg-white/[0.03] transition-colors duration-300"
+                className="group flex flex-col h-full border border-white/[0.07] bg-white/[0.015] hover:bg-white/[0.03] hover:border-accent/25 transition-all duration-500 hover:-translate-y-1 p-4 md:p-5"
               >
-                <span className="hidden sm:block font-['DM_Mono',monospace] text-[11px] text-white/25 tabular-nums w-6 shrink-0 group-hover:text-accent/60 transition-colors duration-300">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-
-                {LOGOS[project.logo] && (
-                  <div className="hidden sm:flex w-11 h-11 md:w-12 md:h-12 shrink-0 items-center justify-center rounded-[3px] bg-white border border-white/10 overflow-hidden p-2">
+                <div className="flex items-start justify-between mb-5">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-md bg-white border border-white/10 overflow-hidden p-2 flex items-center justify-center shrink-0">
                     <img src={LOGOS[project.logo]} alt="" className="w-full h-full object-contain" />
                   </div>
-                )}
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-1.5">
-                    <span className="font-['DM_Mono',monospace] text-[10px] text-accent/70 tracking-widest">{project.year}</span>
-                    <span className="w-1 h-1 rounded-full bg-white/20 shrink-0" />
-                    <span className="font-['DM_Mono',monospace] text-[10px] text-white/50 tracking-wide truncate">{project.category}</span>
+                  <div className="shrink-0 w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 group-hover:text-accent group-hover:border-accent/50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                    <ArrowUpRight size={14} />
                   </div>
-                  <h3
-                    className="font-['Fraunces',serif] font-light text-white leading-tight truncate group-hover:text-accent transition-colors duration-300"
-                    style={{ fontSize: "clamp(1.15rem, 2.2vw, 1.6rem)" }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p className="hidden md:block font-['Plus_Jakarta_Sans',sans-serif] text-[11px] text-white/50 tracking-wide mt-1 truncate">{project.role}</p>
                 </div>
 
-                <span className="hidden lg:block font-['DM_Mono',monospace] text-[11px] text-accent/80 tracking-widest text-right shrink-0 max-w-[200px]">
-                  {project.metric}
-                </span>
+                <h3
+                  className="font-['Fraunces',serif] font-light text-white leading-tight mb-4 group-hover:text-accent transition-colors duration-300"
+                  style={{ fontSize: "clamp(1rem, 1.4vw, 1.15rem)" }}
+                >
+                  {project.title}
+                </h3>
 
-                <div className="shrink-0 w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/40 group-hover:text-accent group-hover:border-accent/50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
-                  <ArrowUpRight size={16} />
+                <div className="mt-auto flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.07]">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="font-['DM_Mono',monospace] text-[8px] tracking-widest uppercase text-white/55 border border-white/10 px-1.5 py-0.5">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </Link>
             </FadeUp>
@@ -518,6 +499,61 @@ function Projects() {
             </motion.div>
           )}
         </FadeUp>
+      </div>
+    </section>
+  );
+}
+
+// ─── Ideas (Fix My Itch) ───────────────────────────────────────────────────────
+
+function Ideas() {
+  return (
+    <section id="ideas" className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
+      <FadeUp className="mb-12 flex items-end justify-between flex-wrap gap-6">
+        <div>
+          <SectionLabel>Fix My Itch</SectionLabel>
+          <DisplayHeading className="mt-3 whitespace-nowrap" style={{ fontSize: "clamp(1.8rem, 3.6vw, 3.8rem)" }}>
+            Ideas Worth Building
+          </DisplayHeading>
+        </div>
+        <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[13px] text-white/65 max-w-[280px] leading-[1.75]">
+          Problems I think have real startup potential in India — reasoned out, not just noticed.
+        </p>
+      </FadeUp>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {IDEAS.map((idea, i) => (
+          <FadeUp key={idea.id} delay={i * 0.08} className="h-full">
+            <Link
+              to={idea.path}
+              className="group flex flex-col h-full border border-white/[0.07] bg-white/[0.015] hover:bg-white/[0.03] hover:border-accent/25 transition-all duration-500 hover:-translate-y-1 p-4 md:p-5"
+            >
+              <div className="flex items-start justify-between mb-5">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-md bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <Rocket size={20} className="text-accent" />
+                </div>
+                <div className="shrink-0 w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 group-hover:text-accent group-hover:border-accent/50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                  <ArrowUpRight size={14} />
+                </div>
+              </div>
+
+              <h3
+                className="font-['Fraunces',serif] font-light text-white leading-tight mb-4 group-hover:text-accent transition-colors duration-300"
+                style={{ fontSize: "clamp(1rem, 1.4vw, 1.15rem)" }}
+              >
+                {idea.title}
+              </h3>
+
+              <div className="mt-auto flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.07]">
+                {idea.tags.map((tag) => (
+                  <span key={tag} className="font-['DM_Mono',monospace] text-[8px] tracking-widest uppercase text-white/55 border border-white/10 px-1.5 py-0.5">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </Link>
+          </FadeUp>
+        ))}
       </div>
     </section>
   );
@@ -571,60 +607,6 @@ function Achievements() {
             </div>
           </FadeUp>
         ))}
-      </div>
-    </section>
-  );
-}
-
-// ─── Testimonials ─────────────────────────────────────────────────────────────
-
-function Testimonials() {
-  const [active, setActive] = useState(0);
-
-  return (
-    <section className="py-16" style={{ background: "#070709" }}>
-      <div className="px-6 md:px-12 max-w-4xl mx-auto">
-        <FadeUp className="mb-16 text-center">
-          <SectionLabel>Social Proof</SectionLabel>
-          <DisplayHeading className="mt-3" style={{ fontSize: "clamp(2rem, 3.8vw, 3.2rem)" }}>What colleagues say</DisplayHeading>
-        </FadeUp>
-        <div className="relative min-h-[260px] mb-12">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.div key={i} initial={false} animate={{ opacity: active === i ? 1 : 0, y: active === i ? 0 : 18 }} transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }} className={`absolute inset-0 ${active === i ? "pointer-events-auto" : "pointer-events-none"}`}>
-              <blockquote className="font-['Fraunces',serif] font-light text-white/85 leading-[1.35] mb-10" style={{ fontSize: "clamp(1.1rem, 2.4vw, 1.55rem)" }}>&ldquo;{t.quote}&rdquo;</blockquote>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center font-['Fraunces',serif] text-accent" style={{ background: "rgba(200,169,110,0.15)" }}>{t.name[0]}</div>
-                <div>
-                  <div className="font-['Plus_Jakarta_Sans',sans-serif] font-medium text-[13px] text-white/90">{t.name}</div>
-                  <div className="font-['DM_Mono',monospace] text-[10px] text-white/55 tracking-widest">{t.title} · {t.company}</div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        <div className="flex items-center gap-6">
-          <button
-            aria-label="Previous testimonial"
-            onClick={() => setActive((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-            className="group w-9 h-9 shrink-0 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-accent hover:border-accent/50 transition-all duration-300"
-          >
-            <ChevronLeft size={15} />
-          </button>
-          <div className="flex items-center gap-3">
-            {TESTIMONIALS.map((_, i) => (
-              <button key={i} aria-label={`Show testimonial ${i + 1}`} onClick={() => setActive(i)} className="py-2 -my-2 px-0.5">
-                <span className="block h-[2px] transition-all duration-500" style={{ width: active === i ? "48px" : "20px", background: active === i ? "#C8A96E" : "rgba(255,255,255,0.3)" }} />
-              </button>
-            ))}
-          </div>
-          <button
-            aria-label="Next testimonial"
-            onClick={() => setActive((i) => (i + 1) % TESTIMONIALS.length)}
-            className="group w-9 h-9 shrink-0 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-accent hover:border-accent/50 transition-all duration-300"
-          >
-            <ChevronRight size={15} />
-          </button>
-        </div>
       </div>
     </section>
   );
@@ -740,9 +722,9 @@ export function Portfolio() {
       <About />
       <Marquee />
       <Projects />
+      <Ideas />
       <Achievements />
       <Expertise />
-      <Testimonials />
       <Contact />
       <Footer />
     </div>
