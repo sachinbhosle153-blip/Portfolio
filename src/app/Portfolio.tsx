@@ -6,8 +6,11 @@ import miLogoUrl from "../imports/image.png";
 import presolvLogoUrl from "../imports/presolv-logo-2.jpeg";
 import jioLogoUrl from "../imports/jio-logo.png";
 import tataElxsiLogoUrl from "../imports/tataelxsi-logo.jpeg";
+import heroMiUrl from "../assets/hero/mi-wellness.webp";
+import heroJioUrl from "../assets/hero/jio-tv.webp";
+import heroPresolvUrl from "../assets/hero/presolv-dashboard.webp";
 import type { ReactNode, CSSProperties, FormEvent } from "react";
-import { motion, useScroll, useTransform, useInView } from "motion/react";
+import { motion, useInView } from "motion/react";
 import {
   ArrowUpRight,
   Mail,
@@ -277,58 +280,66 @@ function Nav() {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
-function Hero() {
-  const { scrollY } = useScroll();
-  const contentY = useTransform(scrollY, [0, 700], ["0%", "22%"]);
-  const contentOpacity = useTransform(scrollY, [0, 520], [1, 0]);
+// Statement-led hero: what Sachin does, then proof, then small previews of
+// the work. Every number here already appears in the case studies.
+const HERO_PEEK = [
+  { path: "/projects/mumbai-indians", image: heroMiUrl, title: "Mumbai Indians", metric: "45 → 500+ daily users" },
+  { path: "/projects/jio-design-system", image: heroJioUrl, title: "JIO design system", metric: "Adopted by 20+ teams" },
+  { path: "/projects/presolv360", image: heroPresolvUrl, title: "Presolv360 ODR", metric: "Legal tech · Design challenge" },
+];
 
+function Hero() {
+  const ease = [0.16, 1, 0.3, 1] as const;
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" style={{ background: "#09090B" }}>
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full" style={{ background: "radial-gradient(circle, rgba(200,169,110,0.05) 0%, transparent 65%)" }} />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, rgba(200,169,110,0.025) 0%, transparent 70%)" }} />
+    <section id="hero" className="relative overflow-hidden pt-[120px] pb-14 md:pt-[148px] md:pb-20" style={{ background: "#09090B" }}>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-40 right-0 w-[900px] h-[900px] rounded-full" style={{ background: "radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 65%)" }} />
         <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "72px 72px" }} />
-        {[...Array(7)].map((_, i) => (
-          <motion.div key={i} className="absolute w-px" style={{ left: `${12 + i * 12}%`, top: `${10 + (i % 4) * 18}%`, height: `${48 + i * 8}px`, background: "linear-gradient(to bottom, transparent, rgba(200,169,110,0.4), transparent)" }} animate={{ y: [0, -24, 0], opacity: [0.35, 0.75, 0.35] }} transition={{ duration: 5 + i * 0.6, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }} />
-        ))}
       </div>
 
-      <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative z-10 text-center px-6 max-w-6xl mx-auto w-full">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="flex items-center justify-center gap-4 mb-12">
-          <div className="w-10 h-px bg-accent/50" />
-          <SectionLabel>Product Design Manager · Design Systems at Scale · AI-Augmented Workflows</SectionLabel>
-          <div className="w-10 h-px bg-accent/50" />
-        </motion.div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+        <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className="font-['DM_Mono',monospace] text-[12px] tracking-[0.2em] uppercase text-white/60 mb-8">
+          Product Design Manager
+        </motion.p>
 
-        <div className="overflow-hidden mb-5">
-          <motion.h1 initial={{ y: "110%" }} animate={{ y: "0%" }} transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }} className="font-['Fraunces',serif] font-light text-white leading-[0.9] tracking-tight" style={{ fontSize: "clamp(3.8rem, 11vw, 9rem)" }}>
-            Sachin Bhosle
-          </motion.h1>
-        </div>
+        <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2, ease }} className="font-['Fraunces',serif] font-light text-white leading-[0.95] tracking-tight max-w-5xl mb-8" style={{ fontSize: "clamp(2.3rem, 5vw, 4.5rem)" }}>
+          I turn <em className="not-italic text-accent">messy</em> problems into products people actually use.
+        </motion.h1>
 
-        <div className="overflow-hidden mb-14">
-          <motion.p initial={{ y: "110%" }} animate={{ y: "0%" }} transition={{ duration: 1, delay: 0.55, ease: [0.16, 1, 0.3, 1] }} className="font-['Plus_Jakarta_Sans',sans-serif] font-light text-white/65 max-w-md mx-auto leading-relaxed" style={{ fontSize: "clamp(1rem, 1.8vw, 1.2rem)" }}>
-            ~5 years of experience turning ambiguous 0→1 problems into design systems and products that scale — across AI platforms, legal tech, and sports intelligence.
-          </motion.p>
-        </div>
+        <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.35 }} className="font-['Plus_Jakarta_Sans',sans-serif] font-light text-white/70 leading-relaxed max-w-2xl mb-10" style={{ fontSize: "clamp(1rem, 1.25vw, 1.08rem)" }}>
+          ~5 years of experience turning ambiguous 0→1 problems into design systems and products that scale — across AI platforms, legal tech, and sports intelligence.
+        </motion.p>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.85 }} className="flex items-center justify-center gap-4 flex-wrap">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }} className="flex items-center gap-4 flex-wrap mb-12 md:mb-14">
           <a href="#work" className="group flex items-center gap-2 px-8 py-3.5 bg-accent text-[#09090B] font-['Plus_Jakarta_Sans',sans-serif] text-[13px] font-medium tracking-wide hover:bg-[#DFC080] transition-colors duration-300">
-            View Work <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+            See the work <span aria-hidden="true" className="group-hover:translate-y-0.5 transition-transform duration-200">↓</span>
           </a>
-          <a href={resumeUrl} download="Sachin_Bhosle_Resume.pdf" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-8 py-3.5 border border-white/20 text-white/70 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] font-light tracking-wide hover:border-white/50 hover:text-white/90 transition-all duration-300">
-            Resume
+          <a href="#contact" className="flex items-center gap-2 px-8 py-3.5 border border-white/20 text-white/75 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] tracking-wide hover:border-white/50 hover:text-white transition-all duration-300">
+            Say hello <span aria-hidden="true">→</span>
           </a>
-          <a href="#contact" className="flex items-center gap-2 px-8 py-3.5 text-white/60 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] font-light tracking-wide hover:text-white/85 transition-colors duration-300">
-            Contact
+          <a href={resumeUrl} download="Sachin_Bhosle_Resume.pdf" target="_blank" rel="noreferrer" className="px-2 py-3.5 text-white/70 font-['Plus_Jakarta_Sans',sans-serif] text-[13px] underline underline-offset-4 decoration-white/30 hover:text-white hover:decoration-white transition-colors duration-300">
+            Resume (PDF)
           </a>
         </motion.div>
-      </motion.div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8, duration: 1 }} className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <span className="font-['DM_Mono',monospace] text-[10px] text-white/40 tracking-[0.28em] uppercase">Scroll</span>
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }} className="w-px h-9 bg-gradient-to-b from-white/30 to-transparent" />
-      </motion.div>
+
+        <div className="grid sm:grid-cols-3 gap-3 md:gap-4">
+          {HERO_PEEK.map((p, i) => (
+            <motion.div key={p.path} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 + i * 0.08, ease }}>
+              <Link to={p.path} className="group flex items-center gap-4 p-3 border border-white/[0.08] bg-white/[0.02] hover:border-accent/35 hover:bg-white/[0.04] transition-colors duration-300">
+                <div className="w-[72px] h-[54px] shrink-0 overflow-hidden border border-white/10 bg-[#111115]">
+                  <img src={p.image} alt="" width={800} height={500} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] font-medium text-white/90 group-hover:text-accent transition-colors duration-300">{p.title}</h2>
+                  <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[12.5px] text-white/60">{p.metric}</p>
+                </div>
+                <ArrowUpRight size={14} className="shrink-0 text-white/35 group-hover:text-accent transition-colors duration-300" />
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
