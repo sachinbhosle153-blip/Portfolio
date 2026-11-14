@@ -1,34 +1,16 @@
 import { createBrowserRouter } from "react-router";
-import { Portfolio } from "./Portfolio";
-import { MICaseStudy } from "./MICaseStudy";
-import { JIODesignStudy } from "./JIODesignStudy";
-import { PresolvCaseStudy } from "./PresolvCaseStudy";
-import { TataElxsiCaseStudy } from "./TataElxsiCaseStudy";
-import { FundriseCaseStudy } from "./FundriseCaseStudy";
+import { Home } from "./home/Home";
+import { MumbaiIndians } from "./case/MumbaiIndians";
+import { JioDesignSystem } from "./case/JioDesignSystem";
+import { Presolv } from "./case/Presolv";
+import { TataElxsi } from "./case/TataElxsi";
+import { Fundrise } from "./case/Fundrise";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    Component: Portfolio,
-  },
-  {
-    path: "/projects/mumbai-indians",
-    Component: MICaseStudy,
-  },
-  {
-    path: "/projects/jio-design-system",
-    Component: JIODesignStudy,
-  },
-  {
-    path: "/projects/presolv360",
-    Component: PresolvCaseStudy,
-  },
-  {
-    path: "/projects/tata-elxsi-ai-healthcare",
-    Component: TataElxsiCaseStudy,
-  },
-  {
-    path: "/ideas/fundrise",
-    Component: FundriseCaseStudy,
-  },
+  { path: "/", Component: Home },
+  { path: "/projects/mumbai-indians", Component: MumbaiIndians },
+  { path: "/projects/jio-design-system", Component: JioDesignSystem },
+  { path: "/projects/presolv360", Component: Presolv },
+  { path: "/projects/tata-elxsi-ai-healthcare", Component: TataElxsi },
+  { path: "/ideas/fundrise", Component: Fundrise },
 ]);
