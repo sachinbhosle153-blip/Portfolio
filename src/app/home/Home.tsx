@@ -56,28 +56,36 @@ function Caret() {
   );
 }
 
-const INDUSTRIES = ["AI", "Entertainment", "Telecom", "B2B", "B2C", "SaaS", "Legal", "Sports"];
-
-// Industries strip: the list is rendered twice and slid by -50% for a seamless loop.
-function Marquee() {
-  const row = (hidden: boolean) => (
-    <ul className="cv-marquee-row" aria-hidden={hidden || undefined}>
-      {[...INDUSTRIES, ...INDUSTRIES, ...INDUSTRIES].map((w, i) => (
-        <li key={i} aria-hidden={i >= INDUSTRIES.length || undefined}>{w}<i aria-hidden="true">✦</i></li>
-      ))}
-    </ul>
-  );
+// "messy", set slightly askew letter by letter; the letters snap into line when the headline is hovered.
+const MESS: [number, number, number][] = [[-0.03, -0.08, -7], [0.02, 0.06, 6], [-0.02, -0.04, -3], [0.03, 0.07, 8], [-0.01, -0.06, -5]];
+function Messy() {
   return (
-    <section className="cv-marquee" aria-label="Industries I've designed for">
-      <div className="cv-marquee-track">
-        {row(false)}
-        {row(true)}
-      </div>
-    </section>
+    <em className="cv-messy">
+      <span className="cv-sr">messy</span>
+      {[..."messy"].map((c, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          style={{ "--x": `${MESS[i][0]}em`, "--y": `${MESS[i][1]}em`, "--r": `${MESS[i][2]}deg`, "--i": i } as CSSProperties}
+        >
+          {c}
+        </span>
+      ))}
+    </em>
   );
 }
 
-function SelectedWord({ children }: { children: ReactNode }) {
+// A collaborator-style cursor that glides in and "selects" the word.
+function Cursor() {
+  return (
+    <span className="cv-cursor" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 1.5l5.2 14 2.1-5.9 5.9-2.1z" fill="var(--select)" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" /></svg>
+      <b>Sachin</b>
+    </span>
+  );
+}
+
+function SelectedWord({ children, cursor = false }: { children: ReactNode; cursor?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [size, setSize] = useState("");
   useEffect(() => {
@@ -93,10 +101,11 @@ function SelectedWord({ children }: { children: ReactNode }) {
     return () => ro.disconnect();
   }, []);
   return (
-    <span className="cv-sel" ref={ref}>
+    <span className={`cv-sel${cursor ? " is-hero" : ""}`} ref={ref}>
       {children}
       <Handles />
       {size && <span className="cv-dim" aria-hidden="true">{size}</span>}
+      {cursor && <Cursor />}
     </span>
   );
 }
@@ -173,17 +182,23 @@ export function Home() {
       <SiteHeader />
 
       <main>
-        <section className="cv-canvas" aria-label="Introduction">
+        <section className="cv-hero-canvas" aria-label="Introduction">
+          <div className="cv-glow" aria-hidden="true" />
           <div className="cv-wrap cv-hero">
-            <span className="cv-status"><i />Open to senior product design roles</span>
-            <h1>I turn <em>messy</em> problems into <SelectedWord>products</SelectedWord> people actually use.</h1>
+            <h1>
+              <span className="cv-line">I turn <Messy /> problems into</span>
+              <span className="cv-line"><SelectedWord cursor>products</SelectedWord> people actually use.</span>
+            </h1>
             <p className="cv-lede">
               Hi, I'm <b>Sachin</b>. 5 years untangling AI platforms, legal tech and sports intelligence at <b>JIO</b> and <b>Leegality</b>, until the confusing part becomes obvious.
             </p>
           </div>
+          <a className="cv-scroll" href="#work" aria-label="Scroll to work">
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l6 6 6-6M6 12l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </section>
-
-        <Marquee />
 
         <section className="cv-wrap cv-sec" id="work">
           <div className="cv-sec-title">
